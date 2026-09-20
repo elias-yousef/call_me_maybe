@@ -8,13 +8,21 @@ authors = [
 ]
 requires-python = ">=3.14"
 dependencies = [
+    "llm-sdk",
     "numpy>=2.5.3",
-    "pandas>=3.0.6",
-    "requests>=2.34.2",
+    "pydantic>=2.13.5",
 ]
 
-[project.scripts]
-call-me-maybe = "call_me_maybe:main"
+[tool.uv]
+package = false
+
+[tool.uv.workspace]
+members = [
+    "llm_sdk",
+]
+
+[tool.uv.sources]
+llm-sdk = { workspace = true }
 
 [build-system]
 requires = ["uv_build>=0.12.17,<0.13.0"]
