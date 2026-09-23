@@ -59,7 +59,7 @@ class Small_LLM_Model:
         if self._tokenizer.pad_token_id is None:
             # ensure we have a pad token to keep batch helpers happy
             self._tokenizer.pad_token_id = self._tokenizer.eos_token_id
-
+        # pulls the neural network into your computer
         self._model: PreTrainedModel = AutoModelForCausalLM.from_pretrained(
             model_name,
             torch_dtype=self._dtype,
@@ -77,6 +77,9 @@ class Small_LLM_Model:
     def encode(self, text: str) -> torch.Tensor:
         """Tokenise *text* and return a 2-D ``input_ids`` tensor on the target device."""
         ids = self._tokenizer.encode(text, add_special_tokens=False)
+        # The Tensor: torch.tensor converts 
+        # this standard Python list into a
+        # PyTorch Tensor—a highly optimized mathematical matrix
         return torch.tensor([ids], device=self._device, dtype=torch.long)
 
 
